@@ -67,3 +67,28 @@ Risks: stale catalog, plugin sprawl, complex setup, low adoption, scorecards use
 
 ## 12. Next work
 Create a dated matrix of 5–8 platforms, test catalog/template/scorecard workflows, validate integration coverage, and turn MVP features into user stories with permission-specific acceptance criteria.
+
+## 15. Deep research addendum — evidence and product decisions
+
+### Market evidence
+Backstage describes an internal developer portal built around a software catalog, software templates, TechDocs, and plugins. Its catalog stores metadata with code and makes ownership and relationships discoverable; the docs also describe permissions, search, deployment, authentication, and plugin administration. This indicates that a portal is an integration layer and operating product, not just a static developer homepage. Sources: [What is Backstage?](https://backstage.io/docs/overview/what-is-backstage/), [Software Catalog](https://backstage.io/docs/features/software-catalog/), [Backstage docs](https://backstage.io/docs/).
+
+### Competitive implications
+Backstage is extensible but requires platform engineering and maintenance; managed portal vendors emphasize time-to-value and packaged scorecards/integrations. DevBoard should make build-vs-buy trade-offs explicit and focus on a small number of high-frequency developer journeys instead of trying to recreate every plugin at launch.
+
+### Recommended core workflows
+1. Discover a service, owner, repository, documentation, dependencies, and runbook in one place.
+2. Create a service from an approved template with repository, CI workflow, ownership metadata, and baseline policies.
+3. Show service health: deployment status, SLOs, incidents, dependency risk, and recent changes.
+4. Provide team scorecards with explainable criteria, evidence links, and remediation actions.
+5. Offer self-service environment/access requests with approval and audit trail.
+6. Let platform teams manage catalog ingestion, plugin health, templates, and policy versions.
+
+### Architecture and governance
+Use a catalog entity model for Component, API, System, Resource, Team, Domain, and Template; synchronize metadata from source control rather than making the portal a competing source of truth. Build integrations behind adapters and use webhooks/queues for slow provider calls. Scope catalog visibility by team and sensitivity. Plugin permissions must be enforced server-side, secrets must never be embedded in frontend configuration, and template execution must validate inputs and log generated artifacts.
+
+### Validation and success measures
+Measure time to first successful deploy, time to find the owning team, template adoption, catalog freshness, broken-link rate, self-service completion rate, developer satisfaction, and platform support tickets. Avoid vanity measures such as number of catalog cards if ownership data is stale.
+
+### Sources and caveats
+Backstage documentation validates the category capabilities, but the best initial workflows depend on the target engineering organization. Conduct interviews and a prototype test before locking the information architecture. Treat competitor feature/pricing comparisons as date-stamped research.
